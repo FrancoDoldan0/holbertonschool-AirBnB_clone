@@ -12,7 +12,7 @@ class BaseModel:
         self.update_at = self.created_at
 
     def __str__(self):
-        return (f"[{self.__class__.name___}] ({self.id}) {self.__dict__}")
+        return ("[{}] ([]) {}".format, (self.__class__.name___), (self.id), (self.__dict__))
 
     def save(self):
         self.update_at = datetime.now()
