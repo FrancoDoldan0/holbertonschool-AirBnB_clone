@@ -4,7 +4,7 @@ from datetime import datetime
 # Modelo base
 
 
-class BaseModel(self):
+class BaseModel:
     """class"""
     def __init__(self):
         self.id = str(uuid.uuid4())
