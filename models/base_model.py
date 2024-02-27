@@ -15,7 +15,7 @@ class BaseModel:
         return (f"[{self.__class__.name___}] ({self.id}) {self.__dict__}")
 
     def save(self):
-        self.update_at = self.created_at
+        self.update_at = datetime.now
 
     def to_dict(self):
         ob_dict = self.__dict__.copy()
