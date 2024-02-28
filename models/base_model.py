@@ -9,7 +9,7 @@ class BaseModel:
         """BaseModel"""
         if len(kwargs) > 0:
             for k in kwargs:
-                if k is not "_class_":
+                if k is not "__class__":
                     if k is "updated_at" or k is "created_at":
                         setattr(self, k, datetime.
                                 strptime(kwargs[k], "%Y-%m-%d %H:%M:%S.%f"))
