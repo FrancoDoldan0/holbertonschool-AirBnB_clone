@@ -6,7 +6,7 @@ from datetime import datetime
 
 class BaseModel:
     """class"""
-    def _init_(self):
+    def __init__(self):
         """base"""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
