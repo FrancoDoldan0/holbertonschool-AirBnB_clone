@@ -7,14 +7,12 @@ from datetime import datetime
 class BaseModel:
     def __init__(self, *args, **kwargs):
         """BaseModel"""
-        if len(kwargs) > 0:
-            for k in kwargs:
-                if k is not "__class__":
-                    if k is "updated_at" or k is "created_at":
-                        setattr(self, k, datetime.
-                                strptime(kwargs[k], "%Y-%m-%d %H:%M:%S.%f"))
-                    else:
-                        setattr(self, k, kwargs[k])
+        if kwargs:
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    setattr(self, k, datetime.now())
+                if k != "__class__":
+                    setattr(self, k, v)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
