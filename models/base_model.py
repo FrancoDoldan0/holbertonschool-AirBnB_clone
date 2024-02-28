@@ -6,20 +6,11 @@ from datetime import datetime
 
 class BaseModel:
     """class"""
-    def __init__(self, *args, **kwargs):
-        """Initializates the BaseModel instance"""
-        if len(kwargs) > 0:
-            for k in kwargs:
-                if k is not "__class__":
-                    if k is "updated_at" or k is "created_at":
-                        setattr(self, k, datetime.
-                                strptime(kwargs[k], "%Y-%m-%d %H:%M:%S.%f"))
-                    else:
-                        setattr(self, k, kwargs[k])
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+    def __init__(self):
+        """base"""
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = self.created_at
 
     def __str__(self):
         return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
