@@ -19,7 +19,7 @@ class BaseModel:
             self.updated_at = datetime.now()
 
     def _str_(self):
-        return (f"[{self._class.name}] ({self.id}) {self.dict_}")
+        return (f"[{self.__class__.__name__}] ({self.id}) {self.dict_}")
 
     def save(self):
         self.updated_at = datetime.now()
