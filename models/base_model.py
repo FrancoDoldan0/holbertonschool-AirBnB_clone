@@ -18,6 +18,12 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
 
+    def _str_(self):
+        return (f"[{self._class.name}] ({self.id}) {self.dict_}")
+
+    def save(self):
+        self.updated_at = datetime.now()
+
     def to_dict(self):
         ob_dict = self.__dict__.copy()
         ob_dict["__class__"] = self.__class__.__name__
