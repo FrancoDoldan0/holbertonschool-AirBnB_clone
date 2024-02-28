@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 class BaseModel:
-    def _init_(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """BaseModel"""
         if len(kwargs) > 0:
             for k in kwargs:
