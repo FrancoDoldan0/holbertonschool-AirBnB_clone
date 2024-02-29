@@ -39,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arguments):
         """string representation of an instance
             based on the class name and id"""
-    args = arguments.split()
+    arguments = arguments.split()
     if not arguments:
         print("** class name missing **")
     elif args[0] not in self.classes:
