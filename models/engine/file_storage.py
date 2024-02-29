@@ -23,6 +23,7 @@ class FileStorage:
             json.dump(obj_dict, file)
 
     def reload(self):
+        objs = {}
         if os.path.exists(self._file_path):
             with open(self._file_path, "r") as f:
                 objs = json.load(f)
