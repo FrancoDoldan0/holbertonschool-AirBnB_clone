@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not args:
             print("** class name missing **")
-        return
+            return
 
     class_name = args.split()[0]
     if class_name not in ["BaseModel"]:
