@@ -34,7 +34,6 @@ class HBNBCommand(cmd.Cmd):
         else:
 
             new_instance = BaseModel()
-            new_instance.save()
             print(new_instance.id)
 
 
