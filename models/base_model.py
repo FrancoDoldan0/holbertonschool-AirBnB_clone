@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from models import Filestorage
+import models
 
 # Modelo base
 
