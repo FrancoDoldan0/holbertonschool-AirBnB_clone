@@ -27,6 +27,9 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(self.__file_path, "r") as f:
                 objs = json.load(f)
+        else:
+            objs = {}
+
         if objs:
             for obj in objs.values():
                 class_name = obj['__class__']
