@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class FileStorage:
@@ -21,17 +22,16 @@ class FileStorage:
         with open(self._file_path, "w") as file:
             json.dump(obj_dict, file)
 
+    def reload(self):
+        if os.path.exists(self._file_path):
+            with open(self._file_path, "r") as f:
+                objs = json.load(f)
 
-def reload(self):
-        try:
-            with open(self._file_path, "r") as file:
-                obj_dict = json.load(file)
+        for obj in objs.values():
+            class_name = obj['__class__']
 
-            for key, value in obj_dict.items():
-                class_name, obj_id = key.split(".")
-                obj = globals()[class_name](**value)
-                new_key = "{}.{}".format(class_name, obj_id)
-                self._objects[new_key] = obj
+            actual_class_type = eval(class_name)
 
-        except FileNotFoundError:
-            pass
+            deserialized_object = actual_class_type(**obj)
+
+            self.new(deserialized_object)
