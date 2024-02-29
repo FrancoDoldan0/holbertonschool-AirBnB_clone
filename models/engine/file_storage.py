@@ -1,5 +1,6 @@
 import json
 
+
 class FileStorage:
     def __init__(self):
         self._file_path = "file.json"
@@ -20,7 +21,8 @@ class FileStorage:
         with open(self._file_path, "w") as file:
             json.dump(obj_dict, file)
 
-    def reload(self):
+
+def reload(self):
         try:
             with open(self._file_path, "r") as file:
                 obj_dict = json.load(file)
@@ -28,7 +30,8 @@ class FileStorage:
             for key, value in obj_dict.items():
                 class_name, obj_id = key.split(".")
                 obj = globals()[class_name](**value)
-                self._objects[key] = obj
+                new_key = "{}.{}".format(class_name, obj_id)
+                self._objects[new_key] = obj
 
         except FileNotFoundError:
             pass
