@@ -9,7 +9,7 @@ from models import storage
 class HBNBCommand(cmd.Cmd):
     """interpreter"""
     prompt = "(hbnb) "
-    model_classes = [
+    model_classes = {
         "BaseModel",
         "User",
         "Place",
@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
         "State",
         "Amenity",
         "Review"
-    ]
+    }
 
     def do_quit(self, args):
         """Exit the program"""
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = args[0]
 
-        if class_name not in self.model_classes:
+        if class_name not in HBNBCommand().model_classes:
             print("** class doesn't exist **")
             return
 
