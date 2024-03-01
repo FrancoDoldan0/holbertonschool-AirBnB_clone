@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-import uuid
-from models import storage
+import models
 from datetime import datetime
+import uuid
 
 # Modelo base
 
