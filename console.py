@@ -2,7 +2,7 @@
 """entry point of the command interpreter"""
 import cmd
 from models.base_model import BaseModel
-
+from models.__init__ import storage
 
 class HBNBCommand(cmd.Cmd):
     """interpreter"""
