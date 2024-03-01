@@ -1,12 +1,9 @@
 #!/usr/bin/python3
 from datetime import datetime
 import uuid
-from models import storage
 
 
 # Modelo base
-
-
 class BaseModel:
     def __init__(self, *args, **kwargs):
         """BaseModel"""
@@ -25,6 +22,7 @@ class BaseModel:
         return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
 
     def save(self):
+        from models import storage
         self.updated_at = datetime.now()
         storage.save()
 
