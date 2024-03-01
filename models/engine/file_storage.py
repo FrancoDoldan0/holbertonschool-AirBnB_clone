@@ -1,10 +1,10 @@
 #!/usr/bin/python3
+"""filestorage class"""
 import json
-import os
 
 
 class FileStorage:
-    """class"""
+    """ class"""
     __file_path = "file.json"
     __objects = {}
 
@@ -37,7 +37,7 @@ class FileStorage:
                 from models.amenity import Amenity
                 from models.review import Review
                 from models.base_model import BaseModel
-            
+
                 dict_classes = {
                     "Amenity": Amenity,
                     "BaseModel": BaseModel,
@@ -47,12 +47,8 @@ class FileStorage:
                     "State": State,
                     "User": User
                 }
-                for key, value in loaded_data.items():
-                    if '__class__' in value:
-                        class_name = value['__class__']
-                    if class_name in dict_classes:
-                        cls = dict_classes[class_name]
-                        instance = cls(**value)
-                        self.__objects[key] = instance
+                for key, obj in loaded_data.items():
+                    correct_class = dict_classes[obj['__class__']]
+                    self.new(correct_class(**obj))
         except FileNotFoundError:
             pass
