@@ -30,16 +30,16 @@ class HBNBCommand(cmd.Cmd):
 
         if not args:
             print("** class name missing **")
-        return
+            return
 
-    class_name = args.split()[0]
-    if class_name not in ["BaseModel"]:
-        print("** class doesn't exist **")
-        return
+        class_name = args.split()[0]
+        if class_name not in ["BaseModel"]:
+            print("** class doesn't exist **")
+            return
 
-    new_instance = BaseModel()
-    new_instance.save()
-    print(new_instance.id)
+        new_instance = BaseModel()
+        new_instance.save()
+        print(new_instance.id)
 
 
 if __name__ == '__main__':
