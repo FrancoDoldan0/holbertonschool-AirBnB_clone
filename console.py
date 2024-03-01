@@ -25,14 +25,15 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """Create a new instance of BaseModel"""
+        """
+        Create a new instance of BaseModel
+        """
 
         if not args:
             print("** class name missing **")
         elif args not in self.classes:
-            print("* class doesn't exist **")
+            print(" ** class doesn't exist ** ")
         else:
-
             new_instance = BaseModel()
             print(new_instance.id)
 
@@ -69,7 +70,6 @@ class HBNBCommand(cmd.Cmd):
             key = args[0] + "." + args[1]
             if key not in storage.all():
                 print("** no instance found **")
-        else:
 
 
 if __name__ == '__main__':
