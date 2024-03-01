@@ -7,6 +7,15 @@ from models.base_model import BaseModel
 class HBNBCommand(cmd.Cmd):
     """interpreter"""
     prompt = "(hbnb) "
+    model_classes = {
+        "BaseModel",
+        "User",
+        "Place",
+        "City",
+        "State",
+        "Amenity",
+        "Review"
+    }
 
     def do_quit(self, args):
         """Exit the program"""
@@ -31,45 +40,11 @@ class HBNBCommand(cmd.Cmd):
 
         if not args:
             print("** class name missing **")
-        if args not in HBNBCommand().__classes:
+        if args not in HBNBCommand().model_classes:
             print(" ** class doesn't exist ** ")
         else:
             new_instance = BaseModel()
             print(new_instance.id)
-
-    def do_show(self, args):
-        """string representation of an instance
-            based on the class name and id"""
-        args = args.split()
-        if not args:
-            print("** class name missing **")
-        elif args[0] not in self.classes:
-            print("** class doesn't exist **")
-        elif len(args) < 2:
-            print("** instance id missing **")
-        else:
-            instance_key = args[0] + "." + args[1]
-            if instance_key not in storage.all():
-                print("** no instance found **")
-            else:
-                print(storage.all()[instance_key])
-
-    def do_update(self, arg):
-        args = arg.split()
-        if not arg:
-            print("** class name missing **")
-        elif args[0] not in self.classes:
-            print("* class doesn't exist **")
-        elif len(args) < 2:
-            print("** instance id missing **")
-        elif len(args) < 3:
-            print("** attribute name missing**")
-        elif len(args) < 4:
-            print("** value missing**")
-        else:
-            key = args[0] + "." + args[1]
-            if key not in storage.all():
-                print("** no instance found **")
 
 
 if __name__ == '__main__':
