@@ -40,19 +40,19 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """string representation of an instance
             based on the class name and id"""
-    args = args.split()
-    if not args:
-        print("** class name missing **")
-    elif args[0] not in self.classes:
-        print("** class doesn't exist **")
-    elif len(args) < 2:
-        print("** instance id missing **")
-    else:
-        instance_key = args[0] + "." + args[1]
-        if instance_key not in storage.all():
-            print("** no instance found **")
+        args = args.split()
+        if not args:
+            print("** class name missing **")
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
         else:
-            print(storage.all()[instance_key])
+            instance_key = args[0] + "." + args[1]
+            if instance_key not in storage.all():
+                print("** no instance found **")
+            else:
+                print(storage.all()[instance_key])
 
     def do_update(self, arg):
         args = arg.split()
