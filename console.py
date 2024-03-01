@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not args:
             print("** class name missing **")
-        elif args not in self.classes:
+        if args not in HBNBCommand().__classes:
             print(" ** class doesn't exist ** ")
         else:
             new_instance = BaseModel()
