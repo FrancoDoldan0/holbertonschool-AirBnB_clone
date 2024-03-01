@@ -4,6 +4,7 @@ import cmd
 from models.base_model import BaseModel
 from models.__init__ import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """interpreter"""
     prompt = "(hbnb) "
@@ -40,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not args:
             print("** class name missing **")
-        if args not in HBNBCommand().model_classes:
+        elif args not in HBNBCommand().model_classes:
             print(" ** class doesn't exist ** ")
         else:
             new_instance = BaseModel()
