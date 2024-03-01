@@ -8,15 +8,6 @@ from models.__init__ import storage
 class HBNBCommand(cmd.Cmd):
     """interpreter"""
     prompt = "(hbnb) "
-    model_classes = {
-        "BaseModel",
-        "User",
-        "Place",
-        "City",
-        "State",
-        "Amenity",
-        "Review"
-    }
 
     def do_quit(self, args):
         """Exit the program"""
@@ -35,18 +26,20 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """
-        Create a new instance of BaseModel
-        """
+        """Create a new instance of BaseModel"""
 
         if not args:
             print("** class name missing **")
-        elif args not in HBNBCommand().model_classes:
-            print(" ** class doesn't exist ** ")
-        else:
-            new_instance = BaseModel()
-            new_instance.save()
-            print(new_instance.id)
+        return
+
+    class_name = args.split()[0]
+    if class_name not in ["BaseModel"]:
+        print("** class doesn't exist **")
+        return
+
+    new_instance = BaseModel()
+    new_instance.save()
+    print(new_instance.id)
 
 
 if __name__ == '__main__':
