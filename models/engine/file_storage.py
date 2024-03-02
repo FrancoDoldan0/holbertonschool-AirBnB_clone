@@ -25,19 +25,14 @@ class FileStorage:
             json.dump(obj_dict, file)
 
     def reload(self):
-        """reload"""
-        defclass = {
-            'BaseModel': BaseModel
-        }
-
         try:
-            with open(FileStorage.__file_path, "r") as file:
-                deserialized = json.load(file)
-                for key, value in deserialized.items():
-                    classname = value["__class__"]
-                    if classname in defclass:
-                        newobj = defclass[classname](**value)
-                        key = "{}.{}".format(classname, newobj.id)
-                        FileStorage.__objects[key] = newobj
+            with open(self.__file_path, "r") as file:
+                obj_dict = json.load(file)
+
+            for key, value in obj_dict.items():
+                class_name, obj_id = key.split(".")
+                obj = globals()[class_name](**value)
+                self.__objects[key] = obj
+
         except FileNotFoundError:
             pass

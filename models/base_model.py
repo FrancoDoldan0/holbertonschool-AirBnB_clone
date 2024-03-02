@@ -1,22 +1,31 @@
 #!/usr/bin/python3
 from datetime import datetime
-import uuid
+from uuid import uuid4
 
 
 # Modelo base
 class BaseModel:
     def __init__(self, *args, **kwargs):
+        from models import storage
         """BaseModel"""
-        if kwargs:
-            for k, v in kwargs.items():
-                if k == "created_at" or k == "updated_at":
-                    setattr(self, k, datetime.now())
-                if k != "__class__":
-                    setattr(self, k, v)
+        if kwargs == 1:
+            excluded_keys = ['__class__']
+            time_keys = ['created_at', 'updated_at']
+
+            for key, value in kwargs.items():
+                if key in excluded_keys:
+                    continue
+                elif key in time_keys:
+                    tm_obj = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, value)
+                else:
+                    setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.id = str(uuid4())
+            current_time = datetime.now()
+            self.created_at = current_time
+            self.updated_at = current_time
+            storage.new(self)
 
     def __str__(self):
         return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
