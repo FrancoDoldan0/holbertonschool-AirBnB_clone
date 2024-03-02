@@ -6,9 +6,9 @@ import os
 
 
 class FileStorage:
-    def __init__(self):
-        self.__file_path = "file.json"
-        self.__objects = {}
+    """ class"""
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         return self.__objects
@@ -18,9 +18,15 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        obj_dict = {}
-        for key, value in self.__objects.items():
-            obj_dict[key] = value.to_dict()
+        with open(FileStorage.__file_path, 'w') as f:
+            data = {}
+
+            for key, value in FileStorage.__objects.items():
+                dict_object = value.to_dict()
+
+                data[key] = data
+
+            json.dump(data, f)
 
         with open(self.__file_path, "w") as file:
             json.dump(obj_dict, file)
