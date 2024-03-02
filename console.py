@@ -86,6 +86,9 @@ class HBNBCommand(cmd.Cmd):
         if f"{name_arg[0]}.{name_arg[1]}" not in storage.all():
             print("** no instance found **")
             return
+        else:
+            print(storage.all()[f"{name_arg[0]}.{name_arg[1]}"])
+            return
 
 
 if __name__ == '__main__':
