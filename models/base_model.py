@@ -7,8 +7,13 @@ from uuid import uuid4
 class BaseModel:
     def __init__(self, *args, **kwargs):
         from models import storage
-        """BaseModel"""
-        if kwargs == 1:
+        """
+        if kwargs arguments are provided. initializes the object's attributes,
+        excluding special keys like __class__ and work whit time_keys.
+        If there are no kwargs, it generates a new id, sets current timestamps,
+        and adds the object to storage.
+        """
+        if kwargs:
             excluded_keys = ['__class__']
             time_keys = ['created_at', 'updated_at']
 
@@ -17,7 +22,7 @@ class BaseModel:
                     continue
                 elif key in time_keys:
                     tm_obj = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                    setattr(self, key, value)
+                    setattr(self, key, tm_obj)
                 else:
                     setattr(self, key, value)
         else:
