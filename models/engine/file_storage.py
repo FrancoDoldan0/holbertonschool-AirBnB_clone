@@ -2,7 +2,6 @@
 """filestorage class"""
 import json
 from models.base_model import BaseModel
-import os
 
 
 class FileStorage:
@@ -18,15 +17,9 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        with open(FileStorage.__file_path, 'w') as f:
-            data = {}
-
-            for key, value in FileStorage.__objects.items():
-                dict_object = value.to_dict()
-
-                data[key] = data
-
-            json.dump(data, f)
+        obj_dict = {}
+        for key, value in self.__objects.items():
+            obj_dict[key] = value.to_dict()
 
         with open(self.__file_path, "w") as file:
             json.dump(obj_dict, file)
