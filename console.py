@@ -46,7 +46,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        new_instance = globals()[class_name]()
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.amenity import Amenity
+        from models.city import City
+        from models.review import Review
+        from models.place import Place
+        new_instance = eval(f"{arg}()")
         new_instance.save()
         print(new_instance.id)
 
