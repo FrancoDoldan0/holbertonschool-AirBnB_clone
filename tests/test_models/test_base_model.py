@@ -2,6 +2,7 @@ import unittest
 from models.base_model import BaseModel
 from datetime import datetime
 
+
 class TestBaseModel(unittest.TestCase):
     """
     Test suite for the BaseModel class
@@ -17,8 +18,8 @@ class TestBaseModel(unittest.TestCase):
         """
         Test if the instantiated object is of the correct class type.
         """
-        b = BaseModel()
-        self.assertEqual(b.__class__.__name__, "BaseModel")
+        h = BaseModel()
+        self.assertEqual(h.__class__.__name__, "BaseModel")
 
     def test_id_uniqueness(self):
         """
@@ -30,10 +31,22 @@ class TestBaseModel(unittest.TestCase):
 
     def test_created_at(self):
         """
-        Test if the 'created_at' attribute is set when BaseModel is instantiated.
+        Test if the 'created_at' attribute
+        is set when BaseModel is instantiated.
         """
         self.assertTrue(hasattr(self.base_model, 'created_at'))
         self.assertIsInstance(self.base_model.created_at, datetime)
+
+    def test_save_at(self):
+        """
+        Verifies that calling save method updates the 'updated_at' attribute.
+        """
+        base_model_instance = BaseModel()
+        initial_updated_at = base_model_instance.updated_at
+        base_model_instance.save()
+
+        self.assertNotEqual(initial_updated_at, base_model_instance.updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()
