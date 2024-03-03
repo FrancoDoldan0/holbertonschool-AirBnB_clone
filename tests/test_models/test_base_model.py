@@ -47,6 +47,12 @@ class TestBaseModel(unittest.TestCase):
 
         self.assertNotEqual(initial_updated_at, base_model_instance.updated_at)
 
+        def test_str(self):
+            """test str """
+        instance = "[BaseModel] ({}) {}".format(
+            self.base_model.id, self.base_model.__dict__)
+        self.assertEqual(str(self.base_model), instance)
+
 
 if __name__ == '__main__':
     unittest.main()
