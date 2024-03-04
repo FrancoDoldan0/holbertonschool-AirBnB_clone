@@ -22,11 +22,11 @@ class HBNBCommand(cmd.Cmd):
         "Review"
     }
 
-    def do_quit(self, name_arg):
+    def do_quit(self, name_args):
         """Exit the program"""
         return True
 
-    def do_EOF(self, name_arg):
+    def do_EOF(self, name_args):
         """Exit the program"""
         return True
 
@@ -45,13 +45,13 @@ class HBNBCommand(cmd.Cmd):
         Then, it creates an instance of the specified class, saves it,
         and finally prints the ID of the created instance.
         """
-        name_arg = arg_passed.split()
+        name_args = arg_passed.split()
 
-        if len(name_arg) == 0:
+        if len(name_args) == 0:
             print("** class name missing **")
             return
 
-        class_name = name_arg[0]
+        class_name = name_args[0]
 
         if class_name not in self.model_classes:
             print("** class doesn't exist **")
@@ -65,55 +65,58 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg_passed):
 
         """checks if a class name was passed"""
-        name_arg = arg_passed.split()
-        if len(name_arg) == 0:
+        name_args = arg_passed.split()
+        if len(name_args) == 0:
             print("** class name missing **")
             return
 
         """check if the class name is in the class dictionary"""
-        class_name = name_arg[0]
+        class_name = name_args[0]
         if class_name not in self.model_classes:
             print("** class doesn't exist **")
             return
 
         """check if the id class was passed"""
-        if len(name_arg) < 2:
+        if len(name_args) < 2:
             print("** instance id missing **")
             return
 
         """check if the name and id are not in the class dictionary"""
         from models import storage
-        if f"{name_arg[0]}.{name_arg[1]}" not in storage.all():
+        if f"{name_args[0]}.{name_args[1]}" not in storage.all():
             print("** no instance found **")
             return
         else:
-            print(storage.all()[f"{name_arg[0]}.{name_arg[1]}"])
+            print(storage.all()[f"{name_args[0]}.{name_args[1]}"])
             return """if name and id exist"""
 
     def do_destroy(self, arg_passed):
         """coments"""
-        name_arg = arg_passed.split()
+        name_args = arg_passed.split()
 
-        if len(name_arg) == 0:
+        """checks if a class name was passed"""
+        if len(name_args) == 0:
             print("** class name missing **")
             return
 
-        class_name = name_arg[0]
+        """check if the class name is in the class dictionary"""
+        class_name = name_args[0]
         if class_name not in self.model_classes:
             print("** class doesn't exist **")
             return
 
         """check if the id class was passed"""
-        if len(name_arg) == 1:
+        if len(name_args) == 1:
             print("** instance id missing **")
             return
 
+        """check if the name and id are not in the class dictionary"""
         from models import storage
-        if f"{name_arg[0]}.{name_arg[1]}" not in storage.all():
+        if f"{name_args[0]}.{name_args[1]}" not in storage.all():
             print("** no instance found **")
             return
         else:
-            del storage.all()[f"{name_arg[0]}.{name_arg[1]}"]
+            del storage.all()[f"{name_args[0]}.{name_args[1]}"]
             storage.save()
             return
 
@@ -151,6 +154,50 @@ class HBNBCommand(cmd.Cmd):
                     instance_str = str(instance)
                     matching_instances.append(instance_str)
             print(matching_instances)
+
+    def do_update(self, args_passed):
+        from models import storage
+        """
+        update method
+        """
+
+        name_args = args_passed.split()
+
+        """checks if a class name was passed"""
+        if len(name_args) == 0:
+            print("** class name missing **")
+            return
+
+        """check if the class name is in the class dictionary"""
+        class_name = name_args[0]
+        if class_name not in self.model_classes:
+            print("** class doesn't exist **")
+            return
+
+        """check if the id class was passed"""
+        if len(name_args) < 2:
+            print("** instance id missing **")
+            return
+
+        """check if the name and id are not in the class dictionary"""
+        from models import storage
+        if f"{name_args[0]}.{name_args[1]}" not in storage.all():
+            print("** no instance found **")
+            return
+
+        """check if the name of the atribute was passed"""
+        if len(name_args) < 3:
+            print("** attribute name missing **")
+            return
+
+        """check if the value was passed"""
+        if len(name_args) < 4:
+            print("** value missing **")
+            return
+        else:
+            instance = storage.all()[f"{name_args[0]}.{name_args[1]}"]
+            setattr(instance, name_args[2], name_args[3].strip('"'))
+            storage.save()
 
 
 if __name__ == '__main__':
