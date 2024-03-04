@@ -1,5 +1,7 @@
 import unittest
 from models.amenity import Amenity
+from amenity import Amenity
+
 
 class Amenity_Test(unittest.TestCase):
     """
@@ -25,6 +27,7 @@ class Amenity_Test(unittest.TestCase):
         """Test if the name attribute can be updated."""
         self.amenity.name = "new_name"
         self.assertEqual(self.amenity.name, "new_name")
+
 
 if __name__ == '__main__':
     unittest.main()
