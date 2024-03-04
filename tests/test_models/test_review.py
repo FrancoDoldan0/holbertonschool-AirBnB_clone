@@ -1,6 +1,7 @@
 import unittest
 from models.review import Review
 from models.base_model import BaseModel
+from models.review import Review
 
 
 class TestReviewMethods(unittest.TestCase):
